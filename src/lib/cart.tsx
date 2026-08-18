@@ -75,7 +75,7 @@ const CartContext = createContext<CartState | null>(null);
 export function CartProvider({ children }: { children: ReactNode }) {
   const [items, setItems] = useState<CartItem[]>([]);
   const [isOpen, setOpen] = useState(false);
-  const [shippingId, setShippingId] = useState(SHIPPING_METHODS[0].id);
+  const [shippingId, setShippingId] = useState(SHIPPING_METHODS[0]!.id);
   const [promo, setPromo] = useState<Promo | null>(null);
   const [promoError, setPromoError] = useState<string | null>(null);
 
@@ -148,7 +148,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
   }, [promo, subtotal]);
 
   const shippingMethod =
-    SHIPPING_METHODS.find((m) => m.id === shippingId) ?? SHIPPING_METHODS[0];
+    SHIPPING_METHODS.find((m) => m.id === shippingId) ?? SHIPPING_METHODS[0]!;
 
   const shippingCost = useMemo(() => {
     if (items.length === 0) return 0;
